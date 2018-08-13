@@ -12,3 +12,16 @@ Scripts allowing people to be more efficient at their day to day work.
   * Imput from the terminal
   * Provide the output into a table exportable to CSV
   
+
+## Linkedin Employees Scraper [VBA]
+* Goal: Screen-scrape employees from Linkedin search pages.
+* Inputs
+  * Linkedin Search URL
+* Output
+  * Name
+  * Linkedin URL
+  * Title
+  * Current/Past position
+* Improvements
+  * Add a visual Excel interface
+  
