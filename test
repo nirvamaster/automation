@@ -1,0 +1,5 @@
+html = "<!DOCTYPE html><html><body>"
+html = html & "<div style=""font-family:'Segoe UI', Calibri, Arial, Helvetica; font-size: 14px;text-align:justify; max-width: 768px;"">"
+html = html & "Hi Primary team, <br />"
+html = html & "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed mattis metus. Sed a interdum justo, eu sollicitudin nisl. Nam tempus sem non feugiat gravida. Nulla facilisi. Phasellus dictum id felis id mollis. Nullam neque quam, commodo sed mi et, vehicula faucibus lacus. Etiam ultrices mattis augue, eu euismod felis sodales sed. In cursus risus diam, ut faucibus ipsum congue vitae. In viverra vitae est vitae ultrices. Sed eu porta libero. Quisque eu tellus sed libero ornare molestie.<br /><br />"
+html = html & "</div></body></html>"
