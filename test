@@ -1,8 +1,58 @@
+Public Function FormatEmail(Sourceworksheet As Worksheet, CoBDate As Date, FinalRatioLCR As Variant, FinalRatioAUD As Variant)
 
-html = "<!DOCTYPE html><html><body>"
-html = html & "<div style=""font-family:'Segoe UI', Calibri, Arial, Helvetica; font-size: 14px;text-align:justify; max-width: 768px;"">"
-html = html & "Hi Primary team, <br />"
-html = html & "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed mattis metus. Sed a interdum justo, eu sollicitudin nisl. Nam tempus sem non feugiat gravida. Nulla facilisi. Phasellus dictum id felis id mollis. Nullam neque quam, commodo sed mi et, vehicula faucibus lacus. Etiam ultrices mattis augue, eu euismod felis sodales sed. In cursus risus diam, ut faucibus ipsum congue vitae. In viverra vitae est vitae ultrices. Sed eu porta libero. Quisque eu tellus sed libero ornare molestie.</p><br /><br />"
-html = html & "<p>Regards,</p><br /><br />"
-html = html & "<p>Matteo</p><br /><br />"
-html = html & "</div></body></html>"
+Dim OutApp As Object
+Dim OutMail As Object
+Dim eMsg As String
+
+Dim ToRecipients As String
+
+   On Error GoTo FormatEmail_Error
+
+    Application.ScreenUpdating = False
+    Set OutApp = CreateObject("Outlook.Application")
+
+Dim Matrix2_1, Matrix2_2, Matrix2_3, Matrix3_1 As String
+Dim FinanceAllCurrency, AllCurrencyT1, AllCurrencyT0, AllCurrencyAUD As Double
+
+'FinanceAllCurrency = FinalRatioLCR
+AllCurrencyT1 = 10.12
+AllCurrencyT0 = 20.154
+'AllCurrencyAUD = FinalRatioAUD
+Matrix2_1 = "<td>" & FinalRatioLCR & "</td>"
+Matrix2_2 = "<td>" & AllCurrencyT1 & "</td>"
+Matrix2_3 = "<td>" & AllCurrencyT0 & "</td>"
+Matrix3_1 = "<td>" & FinalRatioAUD & "</td>"
+
+eMsg = "<!DOCTYPE html><html><body>" & _
+        "<div style=""font-family:'Segoe UI', Calibri, Arial, Helvetica; font-size: 14px;text-align:justify;"">" & _
+        "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed mattis metus. Sed a interdum justo, eu sollicitudin nisl. Nam tempus sem non feugiat gravida. Nulla facilisi. Phasellus dictum id felis id mollis. Nullam neque quam, commodo sed mi et, vehicula faucibus lacus. Etiam ultrices mattis augue, eu euismod felis sodales sed. In cursus risus diam, ut faucibus ipsum congue vitae. In viverra vitae est vitae ultrices. Sed eu porta libero. Quisque eu tellus sed libero ornare molestie.</p><br /><br /><p>Regards,</p><br /><br /><p>Matteo</p><br /><br /></div></body></html>"
+
+
+ToRecipients = GetToRecipients
+
+   Set OutMail = OutApp.CreateItem(0)
+
+
+      With OutMail
+                .To = ToRecipients
+                .Subject = " Report -" & CoBDate
+                .HTMLBody = "Hi Primary team, " & "<br></br>" & _
+                           eMsg
+                .display
+
+       End With
+
+     On Error GoTo 0
+
+     Set OutMail = Nothing
+
+   On Error GoTo 0
+   Exit Function
+
+FormatEmail_Error:
+
+    Set OutApp = Nothing
+    Application.ScreenUpdating = True
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure FormatEmail of Module modOutlook"
+
+End Function
